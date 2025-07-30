@@ -1,23 +1,49 @@
 import React from 'react';
-import { View, Text, Pressable, StatusBar, useColorScheme } from 'react-native';
+import { View, Text, Pressable, StatusBar, useColorScheme, Image } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function WelcomeScreen({ navigation }: any) {
   const isDarkMode = useColorScheme() === 'dark';
+
   return (
-    <View className="flex-1 items-center justify-center bg-white dark:bg-gray-900 p-4">
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-        Welcome to NativeWind!
-      </Text>
-      <Text className="text-base text-gray-700 dark:text-gray-300 mb-8 text-center">
-        This is a simple UI styled with Tailwind utilities in React Native.
-      </Text>
-      <Pressable
-        className="bg-purple-500 px-6 py-3 rounded-full"
-        onPress={() => navigation.navigate('GoogleMaps')}
+    <>
+      <StatusBar 
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'} 
+        backgroundColor={isDarkMode ? '#1f2937' : '#f9fafb'} 
+      />
+      <LinearGradient
+        colors={isDarkMode ? ['#0f172a', '#1e293b'] : ['#f3f4f6', '#e0e7ff']}
+        className="flex-1 items-center justify-center p-6"
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       >
-        <Text className="text-white text-lg font-semibold">Go to Google Maps</Text>
-      </Pressable>
-    </View>
+        {/* Optional Logo or Image on top */}
+        <Image
+          source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+          className="w-24 h-24 mb-8 rounded-full shadow-lg"
+          resizeMode="contain"
+        />
+
+        <View className="bg-white dark:bg-gray-800 rounded-xl p-8 w-full max-w-md shadow-lg">
+          <Text className="text-4xl font-extrabold text-purple-700 dark:text-purple-400 mb-4 text-center">
+            Welcome to Dudu!
+          </Text>
+
+          <Text className="text-lg text-gray-700 dark:text-gray-300 mb-10 text-center leading-relaxed">
+            Experience a beautifully styled UI with clean and modern design. Tap the button below to open Google Maps.
+          </Text>
+
+          <Pressable
+            className="bg-purple-600 dark:bg-purple-500 rounded-full py-4 shadow-md active:bg-purple-700 dark:active:bg-purple-600"
+            onPress={() => navigation.navigate('GoogleMaps')}
+            android_ripple={{ color: '#7c3aed' }}
+          >
+            <Text className="text-white text-xl font-semibold tracking-wide text-center">
+              Go to Google Maps
+            </Text>
+          </Pressable>
+        </View>
+      </LinearGradient>
+    </>
   );
 }
