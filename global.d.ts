@@ -11,3 +11,7 @@ declare module 'react-native' {
     className?: string;
   }
 }
+declare module '*.png' {
+  const content: any;
+  export default content;
+}
